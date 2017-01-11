@@ -53,7 +53,7 @@ Use Material ProgressBar without the Android Support Library
 
 Use Material ProgressBar with the Android Support Library
 
-    Add colorControlActivated to your style (values/styles.xml)
+    Add colorAccent to your style (values/styles.xml)
     
         <style name="Theme" parent="Theme.AppCompat.NoActionBar">
             <item name="colorAccent">@color/colorAccent</item>
