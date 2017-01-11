@@ -1,7 +1,6 @@
 # android-material-progressbar
 
-Add a ripple drawable to your view on pre-lollipop devices. Supports Android 2.3 API 9 (GINGERBREAD) and up.
-For more information about ripple drawables visit https://developer.android.com/reference/android/graphics/drawable/RippleDrawable.html
+Add a Material ProgressBar on pre-lollipop devices. Supports Android 2.3 API 9 (GINGERBREAD) and up.
 
 Usage:
 
@@ -19,39 +18,43 @@ Usage:
     Step 2. Add the dependency
     
     dependencies {
-	        compile 'com.github.robertapengelly:android-ripple-drawable:1.0.4'
+	        compile 'com.github.robertapengelly:android-material-progressbar:1.0.0'
 	}
 
-Basic Implementation:
+Implementation:
 
-    Create a ripple drawable file (drawable/ripple.xml)
+    Create a layout file with a MaterialProgressBar widget (layout/activity_main.xml)
     
         <?xml version="1.0" encoding="utf-8" ?>
-        <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:color="@color/ripple_material_dark"
-            tools:targetApi="lollipop"> <!-- Optional to suppress the API warning. -->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/activity_main"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
             
-            <item>
-                <shape android:shape="rectangle">
-                    <corners android:radius="5dp" />
-                    <solid android:color="#424242" />
-                    <stroke android:color="#bdbdbd" android:width="1dp" />
-                </shape>
-            </item>
+            <robertapengelly.support.widget.MaterialProgressBar
+                android:indeterminate="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:mpb_progressStyle="horizontal"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
         
-        </ripple>
+        </LinearLayout>
+
+Use Material ProgressBar without the Android Support Library
+
+    Add colorControlActivated to your style (values/styles.xml)
     
-    Add the imports to your class
+        <style name="Theme" parent="@android:style/Theme.NoTitleBar">
+            <item name="colorControlActivated">?attr/colorAccent</item>
+        </style>
+
+Use Material ProgressBar with the Android Support Library
+
+    Add colorControlActivated to your style (values/styles.xml)
     
-        import robertapengelly.support.graphics.drawable.LollipopDrawable;
-        import robertapengelly.support.graphics.drawable.LollipopDrawablesCompat;
-        import robertapengelly.support.view.DrawableHotspotTouch;
-    
-    Add the ripple as your views background
-    
-        View view = findViewById(R.id.your_view);
-        view.setBackgroundDrawable(LollipopDrawablesCompat.getDrawable(getResources(), R.drawable.ripple, getTheme()));
-        view.setClickable(true);
-        view.setOnClickListener(this);
-        view.setOnTouchListener(new DrawableHotspotTouch((LollipopDrawable) view.getBackground()));
+        <style name="Theme" parent="Theme.AppCompat.NoActionBar">
+            <item name="colorAccent">@color/colorAccent</item>
+        </style>
